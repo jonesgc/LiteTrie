@@ -4,6 +4,7 @@ def main():
     trie = liteTrie.createTrie("test")
     liteTrie.addNewWord(trie, "Hello")
     liteTrie.addNewWord(trie, "Melm")
+    liteTrie.addNewWord(trie, "tea")
     liteTrie.printTrie(trie)
 
 
