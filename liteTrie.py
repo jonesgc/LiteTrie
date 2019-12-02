@@ -1,6 +1,6 @@
 #liteTrie is my experimentation with tries in pyhton.
 
-import queue
+import ezPyQueue
 
 #Char should be the letter that is the "payload"
 #Leaves will be a list of leaf nodes that will branch off from a parent node.
@@ -42,20 +42,20 @@ def printLeavesOnCur(cur):
 #Prints the entire trie.
 def printTrie(trie):
     #Print the current node (this would normally be the root node).
-    
-    print(trie.payload)
-
     #Create a queue of leaves that need to be printed at the root level.
-    q = queue.Queue()
-    for leaf in trie.leaf:
-        q.put(leaf)
-        print(leaf.payload)
-
-    cur = trie
-
+    q = ezPyQueue.ezQueue()
+    q.place(trie)
         
-    #while not q.empty():
-        #print (q.get())
+        
+    while q.isEmpty() == False:
+        node = q.popTop()
+        print(node.payload)
+
+        # Add leaves to queue.
+
+        for l in node.leaf:
+            q.place(l)
+
 
     # Old Solution for printing leaves on a node.
     '''
