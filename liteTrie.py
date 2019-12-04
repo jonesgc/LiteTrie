@@ -1,5 +1,5 @@
 #liteTrie is my experimentation with tries in pyhton.
-
+# Using pytest-4.6.6 
 import ezPyQueue
 
 #Char should be the letter that is the "payload"
@@ -32,6 +32,7 @@ def createTrie(word):
 
     return root
 
+
 #Prints the current payloads of the leaves attached to the current node.
 def printLeavesOnCur(cur):
     numberOfleaves = len(cur.leaf)
@@ -45,6 +46,7 @@ def printTrie(trie):
     #Create a queue of leaves that need to be printed at the root level.
     q = ezPyQueue.ezQueue()
     q.place(trie)
+    print(type(trie))
         
         
     while q.isEmpty() == False:
@@ -53,7 +55,7 @@ def printTrie(trie):
 
         # Add leaves to queue.
         if not node.leaf:
-                print("End of word")
+            print("End of word")
         for l in node.leaf:
             q.place(l)
             
