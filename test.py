@@ -7,5 +7,11 @@ def main():
     liteTrie.addNewWord(trie, "tea")
     liteTrie.printTrie(trie)
     
+    inputWord = input("Enter a letter to find a predicted word: ")
+    print("Entered letter was t")
+
+    suggestions = liteTrie.findWord(trie , inputWord)
+    print(suggestions)
+    
 if __name__ == "__main__":
     main()

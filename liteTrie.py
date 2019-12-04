@@ -87,6 +87,29 @@ def addNewWord(root, word):
             new = current.addLeaf(word[x])
             current = new
             x = x+1
-        
+
+# Find Word function compares a input sequence of letters againsts the trie and returns possible matches.
+def findWord(root, sequence):
+    suggestions = []
+    suggestWord = 0
+    depth = 0
+
+    for rootLeaf in root.leaf:
+
+        # Matched the starting letter of a word to that of the sequence.
+        if sequence[0] == rootLeaf:
+            suggestWord = suggestWord + sequence[0]
+            
+            return suggestions
+            
+        else:
+            print("No matches based on entered sequence.")
+
+            return False
+
+
+    
+    
+
     
     
