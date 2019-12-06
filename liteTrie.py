@@ -63,6 +63,7 @@ def printTrie(trie):
 #Add a new word to the root node, checking to see if it shares the starting letter with any current entries.
 # -- TO DO -- Need to check if the word has already been added i.e. all the letters are already in the trie in the same order.
 def addNewWord(root, word):
+
     i = len(word)
 
     testFlag = False
@@ -88,24 +89,44 @@ def addNewWord(root, word):
             current = new
             x = x+1
 
-# Find Word function compares a input sequence of letters againsts the trie and returns possible matches.
-def findWord(root, sequence):
-    suggestions = []
-    suggestWord = 0
+# Find Word traverses the trie in search of a sequence of characters which would form a word.
+def findWord(trie, sequence):
+    
     depth = 0
+    q = ezPyQueue.ezQueue()
+    q.place(trie)
 
-    for rootLeaf in root.leaf:
+    markedq = ezPyQueue.ezQueue()
+        
+    while q.isEmpty() == False:
+        node = q.popTop()
 
-        # Matched the starting letter of a word to that of the sequence.
-        if sequence[0] == rootLeaf:
-            suggestWord = suggestWord + sequence[0]
-            
-            return suggestions
-            
-        else:
-            print("No matches based on entered sequence.")
+        if node.payload == sequence[0]:
+            print("Match found at ", depth, node.payload, sequence[depth])
+            markedq.place(node)
+            break
 
-            return False
+        # Add child leaves to main traverse queue. 
+        for l in node.leaf:
+            q.place(l)
+
+
+
+    while markedq.isEmpty() == False:
+        markedNode = markedq.popTop()
+
+        print(markedNode.payload)
+
+        for leaf in markedNode.leaf:
+            markedq.place(leaf)
+
+
+# Suggest words is meant to traverse the trie to find words that partially match the input sequence.
+def suggestWords(root, sequence):
+
+    suggestions = []
+    suggestWord = ""
+    depth = 0
 
 
     
