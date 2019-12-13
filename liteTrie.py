@@ -95,14 +95,17 @@ def findWord(trie, sequence):
     depth = 0
     q = ezPyQueue.ezQueue()
     q.place(trie)
-
+    matchedLetters = []
+    reconstructedWords = []
     markedq = ezPyQueue.ezQueue()
-        
+    tempWord = ""
+
     while q.isEmpty() == False:
         node = q.popTop()
 
         if node.payload == sequence[0]:
             print("Match found at ", depth, node.payload, sequence[depth])
+            matchedLetters.append(node.payload)
             markedq.place(node)
             break
 
@@ -110,16 +113,22 @@ def findWord(trie, sequence):
         for l in node.leaf:
             q.place(l)
 
-
-
     while markedq.isEmpty() == False:
         markedNode = markedq.popTop()
 
-        print(markedNode.payload)
+        print("Matched node to:", markedNode.payload)
+        tempWord = tempWord + markedNode.payload
+
+        if not markedNode.leaf:
+            print("No more leaves")
+            reconstructedWords.append(tempWord)
+            tempWord = sequence     # When this if condition is met it means that the first word has been reconstructed. Due to Current Logic the first word will always have the matched sequence intact.
+                                    # However the second and after words will not have the matched sequence intact due to it being already used higher up in the tree.
 
         for leaf in markedNode.leaf:
             markedq.place(leaf)
-
+    
+    return reconstructedWords
 
 # Suggest words is meant to traverse the trie to find words that partially match the input sequence.
 def suggestWords(root, sequence):
